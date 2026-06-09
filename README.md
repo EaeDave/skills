@@ -1,4 +1,4 @@
-# MD Software Skills
+# Personal Agent Skills
 
 [![skills.sh](https://skills.sh/b/EaeDave/skills)](https://skills.sh/EaeDave/skills)
 
@@ -48,9 +48,6 @@ These skills keep that context close to the code, explicit, and maintainable.
 
 - **[business-readme](./business-readme/SKILL.md)** — Identifies business rules from project context and maintains a concise `README.md` with human-readable business rules first, then technical run instructions. Also maintains `LLM_CONTEXT.md` for future agents.
 
-### Temporary
-
-- **[test-picker](./test-picker/SKILL.md)** — Temporary skill used only to verify the installer skill-selection TUI. Remove before publishing the final skill catalog.
 
 ## Repository Structure
 
@@ -60,8 +57,6 @@ skills/
     SKILL.md
     scripts/
       validate-business-readme.js
-  test-picker/
-    SKILL.md
 ```
 
 Each skill lives in its own directory and includes a `SKILL.md` file with frontmatter:
