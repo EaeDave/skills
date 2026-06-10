@@ -59,8 +59,6 @@ skills/
       validate-business-readme.cjs
   work-report/
     SKILL.md
-    scripts/
-      collect-work-report-context.cjs
 ```
 
 Each skill lives in its own directory and includes a `SKILL.md` file with frontmatter:
@@ -102,12 +100,6 @@ The skill will:
 2. collect Git context from status, diffs, branch commits, and recent commits;
 3. ask before including ambiguous commits;
 4. produce a natural Markdown report with context, completed work, business rules, related commits, validation, and observations.
-
-Collector command:
-
-```bash
-node work-report/scripts/collect-work-report-context.cjs <project-root>
-```
 
 ## Development
 

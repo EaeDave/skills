@@ -8,12 +8,7 @@ description: Generates concise human-readable Markdown work reports from the cur
 ## Quick start
 
 1. Use the current conversation as the primary scope.
-2. Run the context collector when the project is in Git:
-
-   ```bash
-   node <skill>/scripts/collect-work-report-context.cjs <project-root>
-   ```
-
+2. Inspect Git directly when needed: `git status --short --branch`, `git log --oneline --decorate --max-count=12`, `git diff --stat`, `git diff --cached --stat`.
 3. Inspect only the files, diffs, commits, tests, and docs needed to understand the delivered behavior.
 4. If any commit may or may not belong to the current card, ask before including it.
 5. Write a concise Markdown report for Jira, Linear, GitHub Issues, or similar trackers.
@@ -91,7 +86,7 @@ O card corrigiu a aprovação de pedidos quando o cliente já tinha limite liber
 ## Workflow
 
 1. Collect session facts: user request, decisions, completed changes, validations, and unresolved points.
-2. Collect Git facts with the helper script and targeted Git commands if needed.
+2. Collect Git facts with targeted Git commands when needed.
 3. Inspect relevant diffs/files to translate implementation into user-visible behavior and business rules.
 4. Ask only about ambiguous scope, especially commits that may belong to another card.
 5. Produce the Markdown report directly; do not create files unless the user asks.
