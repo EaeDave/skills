@@ -31,7 +31,7 @@ Use a concise human-first structure:
 <!-- business-readme:business-rules:start -->
 ## Business rules
 
-[Complete product rules in plain human language. Explain actors, decisions, states, limits, exceptions, outcomes, and the real source for each backend/integration-backed rule: HTTP route, queue/event, job, RPC, or external operation name such as `/api/intelipost/orders` or `MILLENNIUM!MGRENDENE.INTELIPOST.LISTA_PEDIDOS`.]
+[Complete product rules in plain human language. Explain actors, decisions, states, limits, exceptions, outcomes, and the real source for each backend/integration-backed rule. Label the source type clearly: `Endpoint interno: /api/intelipost/orders`, `Operação externa: MILLENNIUM!MGRENDENE.INTELIPOST.LISTA_PEDIDOS`, `Evento interno: order.created`, or `Job interno: sync-orders`.]
 <!-- business-readme:business-rules:end -->
 
 <!-- business-readme:technical:start -->
@@ -44,7 +44,7 @@ Use a concise human-first structure:
 Rules for the README:
 
 - Business rules must appear before technical instructions.
-- For rules validated or triggered by a backend/API/integration, show the real entrypoint beside the rule: `Fonte real: <endpoint/operation/event/job>`.
+- For rules validated or triggered by a backend/API/integration, show the real entrypoint beside the rule and label whether it is internal or external: `Endpoint interno: <route>`, `Operação externa: <system.operation>`, `Evento interno/externo: <event>`, or `Job interno/externo: <job>`.
 - Prefer domain terms a non-engineer would understand.
 - Keep technical detail out of the business section unless it changes the business outcome or identifies the real source of a rule.
 - If the existing README is mostly technical or weak on business rules, replace its structure once, preserving useful technical commands under `Technical guide`.
@@ -59,10 +59,10 @@ Create or update this file with markers:
 # LLM Context
 
 ## Current business rule map
-[Short index of rules, where they are implemented/tested, and their real source endpoints/operations.]
+[Short index of rules, where they are implemented/tested, and their labeled real sources: internal endpoints/events/jobs vs external APIs/operations.]
 
 ## Technical map for future LLMs
-[Entrypoints, important directories, commands, data model, integrations, external operation names, gotchas.]
+[Entrypoints, important directories, commands, data model, integrations, external operation names, internal route names, gotchas.]
 
 ## Conflicts and unknowns
 [Only unresolved ambiguity or divergence between code/tests/docs.]
@@ -82,7 +82,7 @@ Rules for history:
 ## Workflow
 
 1. Locate project entrypoints and docs without broad blind reads.
-2. Build a rule inventory: actors/permissions, visible workflows, state transitions, calculations, limits, eligibility, validations, user-facing exceptions, and integrations/endpoints/operation names that change outcomes.
+2. Build a rule inventory: actors/permissions, visible workflows, state transitions, calculations, limits, eligibility, validations, user-facing exceptions, and labeled sources that change outcomes: internal endpoints/events/jobs vs external APIs/operations.
 3. Compare inventory with current `README.md` and `LLM_CONTEXT.md` marker blocks.
 4. Write the README business section as the canonical human explanation.
 5. Write the technical guide from observed project commands and preserved README commands.
