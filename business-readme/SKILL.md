@@ -8,9 +8,9 @@ description: Identifies business rules from project context and maintains a conc
 ## Quick start
 
 1. Ask the output language before writing docs: `1. Português do Brasil`, `2. English`, or custom typed language. If the user already answered in this conversation, use that.
-2. Inspect the project context: README, docs, tests, routes/controllers/use-cases/domain models, schemas/migrations/seeds, config, examples, and recent task context relevant to business behavior.
+2. Inspect the project context: README, docs, tests, routes/controllers/use-cases/domain models, schemas/migrations/seeds, config, examples, integration clients, real endpoints/operation names, and recent task context relevant to business behavior.
 3. Update `README.md` so business rules come first in human language, then technical execution instructions.
-4. Update `LLM_CONTEXT.md` with implementation-facing context, source map, uncertainties, and history.
+4. Update `LLM_CONTEXT.md` with implementation-facing context, source map, real endpoints/operations, uncertainties, and history.
 5. Run the validator script if available: `node <skill>/scripts/validate-business-readme.cjs <project-root>`.
 
 ## Source-of-truth policy
@@ -31,7 +31,7 @@ Use a concise human-first structure:
 <!-- business-readme:business-rules:start -->
 ## Business rules
 
-[Complete product rules in plain human language. Explain actors, decisions, states, limits, exceptions, and outcomes.]
+[Complete product rules in plain human language. Explain actors, decisions, states, limits, exceptions, outcomes, and the real source for each backend/integration-backed rule: HTTP route, queue/event, job, RPC, or external operation name such as `/api/intelipost/orders` or `MILLENNIUM!MGRENDENE.INTELIPOST.LISTA_PEDIDOS`.]
 <!-- business-readme:business-rules:end -->
 
 <!-- business-readme:technical:start -->
@@ -44,8 +44,9 @@ Use a concise human-first structure:
 Rules for the README:
 
 - Business rules must appear before technical instructions.
+- For rules validated or triggered by a backend/API/integration, show the real entrypoint beside the rule: `Fonte real: <endpoint/operation/event/job>`.
 - Prefer domain terms a non-engineer would understand.
-- Keep technical detail out of the business section unless it changes the business outcome.
+- Keep technical detail out of the business section unless it changes the business outcome or identifies the real source of a rule.
 - If the existing README is mostly technical or weak on business rules, replace its structure once, preserving useful technical commands under `Technical guide`.
 - If marker blocks already exist, update only those generated blocks and preserve manual content outside them.
 
@@ -58,10 +59,10 @@ Create or update this file with markers:
 # LLM Context
 
 ## Current business rule map
-[Short index of rules and where they are implemented/tested.]
+[Short index of rules, where they are implemented/tested, and their real source endpoints/operations.]
 
 ## Technical map for future LLMs
-[Entrypoints, important directories, commands, data model, integrations, gotchas.]
+[Entrypoints, important directories, commands, data model, integrations, external operation names, gotchas.]
 
 ## Conflicts and unknowns
 [Only unresolved ambiguity or divergence between code/tests/docs.]
@@ -81,7 +82,7 @@ Rules for history:
 ## Workflow
 
 1. Locate project entrypoints and docs without broad blind reads.
-2. Build a rule inventory: actors/permissions, visible workflows, state transitions, calculations, limits, eligibility, validations, user-facing exceptions, and integrations that change outcomes.
+2. Build a rule inventory: actors/permissions, visible workflows, state transitions, calculations, limits, eligibility, validations, user-facing exceptions, and integrations/endpoints/operation names that change outcomes.
 3. Compare inventory with current `README.md` and `LLM_CONTEXT.md` marker blocks.
 4. Write the README business section as the canonical human explanation.
 5. Write the technical guide from observed project commands and preserved README commands.
