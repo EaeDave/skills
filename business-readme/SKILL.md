@@ -11,7 +11,7 @@ description: Identifies business rules from project context and maintains a conc
 2. Inspect the project context: README, docs, tests, routes/controllers/use-cases/domain models, schemas/migrations/seeds, config, examples, and recent task context relevant to business behavior.
 3. Update `README.md` so business rules come first in human language, then technical execution instructions.
 4. Update `LLM_CONTEXT.md` with implementation-facing context, source map, uncertainties, and history.
-5. Run the validator script if available: `node <skill>/scripts/validate-business-readme.js <project-root>`.
+5. Run the validator script if available: `node <skill>/scripts/validate-business-readme.cjs <project-root>`.
 
 ## Source-of-truth policy
 

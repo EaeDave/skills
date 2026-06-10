@@ -5,7 +5,7 @@ const { execFileSync } = require('child_process');
 const path = require('path');
 
 function usage() {
-  console.log(`Usage: node collect-work-report-context.js [project-root] [--base <ref>] [--limit <n>]
+  console.log(`Usage: node collect-work-report-context.cjs [project-root] [--base <ref>] [--limit <n>]
 
 Prints compact Git context for a human work report.
 

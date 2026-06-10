@@ -56,11 +56,11 @@ skills/
   business-readme/
     SKILL.md
     scripts/
-      validate-business-readme.js
+      validate-business-readme.cjs
   work-report/
     SKILL.md
     scripts/
-      collect-work-report-context.js
+      collect-work-report-context.cjs
 ```
 
 Each skill lives in its own directory and includes a `SKILL.md` file with frontmatter:
@@ -89,7 +89,7 @@ The skill will:
 Validator command:
 
 ```bash
-node business-readme/scripts/validate-business-readme.js <project-root>
+node business-readme/scripts/validate-business-readme.cjs <project-root>
 ```
 
 ## Using `work-report`
@@ -106,7 +106,7 @@ The skill will:
 Collector command:
 
 ```bash
-node work-report/scripts/collect-work-report-context.js <project-root>
+node work-report/scripts/collect-work-report-context.cjs <project-root>
 ```
 
 ## Development

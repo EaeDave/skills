@@ -11,7 +11,7 @@ description: Generates concise human-readable Markdown work reports from the cur
 2. Run the context collector when the project is in Git:
 
    ```bash
-   node <skill>/scripts/collect-work-report-context.js <project-root>
+   node <skill>/scripts/collect-work-report-context.cjs <project-root>
    ```
 
 3. Inspect only the files, diffs, commits, tests, and docs needed to understand the delivered behavior.
