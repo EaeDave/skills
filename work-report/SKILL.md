@@ -1,6 +1,6 @@
 ---
 name: work-report
-description: Generates concise human-readable Markdown work reports from the current session, code changes, and relevant Git commits, with business rules first and light technical detail. Use when the user asks for a Jira, Linear, card, ticket, delivery, implementation, feature, bug-fix, or work-summary report.
+description: Generates concise human-readable Markdown work reports as root-level .md files from the current session, code changes, and relevant Git commits, with business rules first and light technical detail. Use when the user asks for a Jira, Linear, card, ticket, delivery, implementation, feature, bug-fix, or work-summary report.
 ---
 
 # Work Report
@@ -11,7 +11,7 @@ description: Generates concise human-readable Markdown work reports from the cur
 2. Inspect Git directly when needed: `git status --short --branch`, `git log --oneline --decorate --max-count=12`, `git diff --stat`, `git diff --cached --stat`.
 3. Inspect only the files, diffs, commits, tests, and docs needed to understand the delivered behavior.
 4. If any commit may or may not belong to the current card, ask before including it.
-5. Write a concise Markdown report for Jira, Linear, GitHub Issues, or similar trackers.
+5. Create a concise `.md` report in the project root and reply with the file path.
 
 ## Default scope
 
@@ -20,13 +20,24 @@ description: Generates concise human-readable Markdown work reports from the cur
 - Do not include unrelated refactors, chores, experiments, or old branch work unless the user confirms.
 - If the user names a card, ticket, branch, PR, commit range, or file list, use that as the scope.
 
+## Output file
+
+- Always write the report to a `.md` file in the project root; do not only paste rendered Markdown in chat.
+- Use a meaningful filesystem-safe name: `<CARD-ID>-work-report.md` when a card/ticket exists, otherwise `work-report-YYYY-MM-DD-<short-topic>.md`.
+- Build `<short-topic>` from the feature or bug in kebab-case, without accents, spaces, or punctuation.
+- If the same-scope report already exists, update it. If the name collides with a different report, add `-2`, `-3`, etc.
+- Final chat response should include the file path and one-sentence summary, not the full report unless asked.
+
 ## Report shape
 
 Use this structure unless the user asks otherwise:
 
 ```md
-## Contexto
-[Problema, feature, bug fix, or motivation in plain language.]
+# Relatório de entrega — [card or topic]
+
+**Contexto:** [Problem, feature, bug fix, or motivation in plain language.]
+
+**Destaque:** [Most important business outcome delivered.]
 
 ## O que foi feito
 - [Business-facing behavior delivered.]
@@ -46,30 +57,11 @@ Use this structure unless the user asks otherwise:
 - [Only unresolved ambiguity, risk, follow-up, or deployment note. Omit if empty.]
 ```
 
-Mini example:
-
-```md
-## Contexto
-O card corrigiu a aprovação de pedidos quando o cliente já tinha limite liberado.
-
-## O que foi feito
-- A aprovação agora respeita o limite disponível antes de bloquear o pedido.
-- Pedidos sem limite continuam sendo enviados para análise manual.
-
-## Regras de negócio impactadas
-- Cliente com limite disponível pode avançar sem revisão manual.
-
-## Commits relacionados
-- `abc1234` — Fix order approval: ajusta a decisão de aprovação automática.
-
-## Validação
-- `npm test -- order-approval`
-```
-
 ## Writing style
 
-- Match the user's language; default to Portuguese do Brasil when the user writes in Portuguese.
+- Match the user's language; default to Português do Brasil when the user writes in Portuguese.
 - Keep the default report around 300-600 words.
+- Use copyable raw Markdown syntax in the file: `#`, `##`, `**bold**`, lists, and backticked commands/commits.
 - Sound like a human teammate, not a changelog generator.
 - Prefer simple business language over framework or architecture terms.
 - Mention technical files, services, migrations, or commands only when they help explain the result.
@@ -89,5 +81,5 @@ O card corrigiu a aprovação de pedidos quando o cliente já tinha limite liber
 2. Collect Git facts with targeted Git commands when needed.
 3. Inspect relevant diffs/files to translate implementation into user-visible behavior and business rules.
 4. Ask only about ambiguous scope, especially commits that may belong to another card.
-5. Produce the Markdown report directly; do not create files unless the user asks.
-6. Keep the report concise and tracker-ready.
+5. Create or update the Markdown report file in the project root.
+6. Reply with the file path and a short summary.

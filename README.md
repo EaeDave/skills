@@ -92,14 +92,14 @@ node business-readme/scripts/validate-business-readme.cjs <project-root>
 
 ## Using `work-report`
 
-After installing, run the skill when you need a concise delivery report for a card or ticket.
+After installing, run the skill when you need a concise Markdown delivery report file for a card or ticket.
 
 The skill will:
 
 1. use the current conversation as the primary scope;
 2. collect Git context from status, diffs, branch commits, and recent commits;
 3. ask before including ambiguous commits;
-4. produce a natural Markdown report with context, completed work, business rules, related commits, validation, and observations.
+4. create a natural root-level Markdown report file with context, completed work, business rules, related commits, validation, and observations.
 
 ## Development
 
