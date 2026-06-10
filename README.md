@@ -47,7 +47,7 @@ These skills keep that context close to the code, explicit, and maintainable.
 ### Documentation
 
 - **[business-readme](./business-readme/SKILL.md)** — Identifies business rules from project context and maintains a concise `README.md` with human-readable business rules first, then technical run instructions. Also maintains `LLM_CONTEXT.md` for future agents.
-
+- **[work-report](./work-report/SKILL.md)** — Generates concise Markdown work reports for Jira, Linear, or similar cards from the current session, relevant code changes, and related commits.
 
 ## Repository Structure
 
@@ -57,6 +57,10 @@ skills/
     SKILL.md
     scripts/
       validate-business-readme.js
+  work-report/
+    SKILL.md
+    scripts/
+      collect-work-report-context.js
 ```
 
 Each skill lives in its own directory and includes a `SKILL.md` file with frontmatter:
@@ -86,6 +90,23 @@ Validator command:
 
 ```bash
 node business-readme/scripts/validate-business-readme.js <project-root>
+```
+
+## Using `work-report`
+
+After installing, run the skill when you need a concise delivery report for a card or ticket.
+
+The skill will:
+
+1. use the current conversation as the primary scope;
+2. collect Git context from status, diffs, branch commits, and recent commits;
+3. ask before including ambiguous commits;
+4. produce a natural Markdown report with context, completed work, business rules, related commits, validation, and observations.
+
+Collector command:
+
+```bash
+node work-report/scripts/collect-work-report-context.js <project-root>
 ```
 
 ## Development
