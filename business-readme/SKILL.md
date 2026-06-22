@@ -1,6 +1,6 @@
 ---
 name: business-readme
-description: Identifies business rules from project context and maintains a concise README with human-readable business rules first, then technical run instructions, plus LLM_CONTEXT.md for future agents. Use when the user asks to update a README from project context, extract business rules, document product behavior, maintain LLM project context, or when a feature/debug fix changes business rules.
+description: Identifies business rules from project context and maintains a concise README with human-readable business rules first, then technical run instructions, plus `Docs/LLM_CONTEXT.md` for future agents. Use when the user asks to update a README from project context, extract business rules, document product behavior, maintain LLM project context, or when a feature/debug fix changes business rules.
 ---
 
 # Business README
@@ -10,14 +10,14 @@ description: Identifies business rules from project context and maintains a conc
 1. Ask the output language before writing docs: `1. Português do Brasil`, `2. English`, or custom typed language. If the user already answered in this conversation, use that.
 2. Inspect the project context: README, docs, tests, routes/controllers/use-cases/domain models, schemas/migrations/seeds, config, examples, integration clients, real endpoints/operation names, and recent task context relevant to business behavior.
 3. Update `README.md` so business rules come first in human language, then technical execution instructions.
-4. Update `LLM_CONTEXT.md` with implementation-facing context, source map, real endpoints/operations, uncertainties, and history.
+4. Create or update `Docs/LLM_CONTEXT.md` with implementation-facing context, source map, real endpoints/operations, uncertainties, and history. If the root-level `Docs/` directory does not exist, create it first.
 5. Run the validator script if available: `node <skill>/scripts/validate-business-readme.cjs <project-root>`.
 
 ## Source-of-truth policy
 
 - Code and tests beat old docs when they disagree.
 - Existing README text is evidence, not authority, unless the user says it is the contract.
-- When code/tests/docs conflict, document observed behavior and record the conflict in `LLM_CONTEXT.md`.
+- When code/tests/docs conflict, document observed behavior and record the conflict in `Docs/LLM_CONTEXT.md`.
 - Ask the user only when a rule is ambiguous, dangerous to infer, or requires choosing product intent instead of observed behavior.
 - Never invent business rules. Mark unresolved items as explicit unknowns.
 
@@ -50,9 +50,9 @@ Rules for the README:
 - If the existing README is mostly technical or weak on business rules, replace its structure once, preserving useful technical commands under `Technical guide`.
 - If marker blocks already exist, update only those generated blocks and preserve manual content outside them.
 
-## LLM_CONTEXT.md structure
+## `Docs/LLM_CONTEXT.md` structure
 
-Create or update this file with markers:
+Create or update this file inside a root-level `Docs/` directory. If `Docs/` does not exist, create it before writing the file; if it already exists, place `LLM_CONTEXT.md` inside it. Do not write a root-level `LLM_CONTEXT.md`.
 
 ```md
 <!-- business-readme:context:start -->
@@ -77,16 +77,16 @@ Rules for history:
 - Append one history entry per skill run that changes or validates business rules.
 - Never delete previous history entries unless the user explicitly asks.
 - Each entry should name the main sources inspected and the rule changes made.
-- If a feature or bug fix changes business behavior, update `README.md` and `LLM_CONTEXT.md` in the same work.
+- If a feature or bug fix changes business behavior, update `README.md` and `Docs/LLM_CONTEXT.md` in the same work.
 
 ## Workflow
 
 1. Locate project entrypoints and docs without broad blind reads.
 2. Build a rule inventory: actors/permissions, visible workflows, state transitions, calculations, limits, eligibility, validations, user-facing exceptions, and labeled sources that change outcomes: internal endpoints/events/jobs vs external APIs/operations.
-3. Compare inventory with current `README.md` and `LLM_CONTEXT.md` marker blocks.
+3. Compare inventory with current `README.md` and `Docs/LLM_CONTEXT.md` marker blocks.
 4. Write the README business section as the canonical human explanation.
 5. Write the technical guide from observed project commands and preserved README commands.
-6. Write/update `LLM_CONTEXT.md` for future implementation/debugging context.
+6. Create or write/update `Docs/LLM_CONTEXT.md` for future implementation/debugging context.
 7. Validate required files, markers, section order, and history.
 
 ## Quality bar
@@ -94,5 +94,5 @@ Rules for history:
 - Complete business rules are more important than exhaustive architecture prose.
 - Concise does not mean shallow: include edge cases and exceptions that affect users.
 - Do not create parallel terminology; reuse domain words already present in code, tests, UI, and docs.
-- Do not add changelog-style noise to README. Keep run history in `LLM_CONTEXT.md`.
+- Do not add changelog-style noise to README. Keep run history in `Docs/LLM_CONTEXT.md`.
 - Do not ship placeholders like `TODO`, `TBD`, or generic boilerplate as if complete.

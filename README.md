@@ -46,7 +46,7 @@ These skills keep that context close to the code, explicit, and maintainable.
 
 ### Documentation
 
-- **[business-readme](./business-readme/SKILL.md)** — Identifies business rules from project context and maintains a concise `README.md` with human-readable rules first, including labeled internal endpoints and external APIs/operations when relevant. Also maintains `LLM_CONTEXT.md` for future agents.
+- **[business-readme](./business-readme/SKILL.md)** — Identifies business rules from project context and maintains a concise `README.md` with human-readable rules first, including labeled internal endpoints and external APIs/operations when relevant. Also maintains `Docs/LLM_CONTEXT.md` for future agents.
 - **[work-report](./work-report/SKILL.md)** — Generates concise Markdown work reports for Jira, Linear, or similar cards from the current session, relevant code changes, and related commits.
 
 ## Repository Structure
@@ -81,7 +81,7 @@ The skill will:
 1. ask which language the docs should use;
 2. inspect relevant project sources;
 3. update `README.md` with business rules before technical instructions;
-4. update `LLM_CONTEXT.md` with implementation-facing context, labeled internal/external endpoints and operations, and uncertainties;
+4. create or update `Docs/LLM_CONTEXT.md` with implementation-facing context, labeled internal/external endpoints and operations, and uncertainties;
 5. validate the generated documentation when the validator script is available.
 
 Validator command:
