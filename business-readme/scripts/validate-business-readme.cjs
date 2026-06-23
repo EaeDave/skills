@@ -6,7 +6,7 @@ const path = require('path');
 
 const root = path.resolve(process.argv[2] || process.cwd());
 const readmePath = path.join(root, 'README.md');
-const contextPath = path.join(root, 'Docs', 'LLM_CONTEXT.md');
+const contextPath = path.join(root, 'docs', 'LLM_CONTEXT.md');
 const errors = [];
 
 function readText(filePath, label) {
@@ -49,7 +49,7 @@ function rejectPlaceholders(block, label) {
 }
 
 const readme = readText(readmePath, 'README.md');
-const context = readText(contextPath, 'Docs/LLM_CONTEXT.md');
+const context = readText(contextPath, 'docs/LLM_CONTEXT.md');
 
 const businessStart = '<!-- business-readme:business-rules:start -->';
 const businessEnd = '<!-- business-readme:business-rules:end -->';
