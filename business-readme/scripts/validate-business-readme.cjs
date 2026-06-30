@@ -42,7 +42,7 @@ function requireNonEmpty(block, label) {
 }
 
 function rejectPlaceholders(block, label) {
-  const placeholderPattern = /\b(TODO|TBD|FIXME|PLACEHOLDER)\b|\[(Complete product rules|How to install|Short index|Entrypoints|Only unresolved|What changed)[^\]]*\]/i;
+  const placeholderPattern = /\b(TODO|TBD|FIXME|PLACEHOLDER)\b|\[(Complete product rules|How to install|Short index|Current entrypoints|Only unresolved|Only decisions)[^\]]*\]/i;
   if (placeholderPattern.test(block)) {
     errors.push(`${label} contains placeholder text`);
   }
@@ -79,12 +79,18 @@ if (context) {
   requireNonEmpty(contextBlock, 'LLM_CONTEXT');
   rejectPlaceholders(contextBlock, 'LLM_CONTEXT');
 
-  if (!/^##\s+History\s*$/m.test(contextBlock)) {
-    errors.push('LLM_CONTEXT must contain a History section');
-  }
+  const requiredContextSections = [
+    'Current business rule map',
+    'Technical map for future LLMs',
+    'Conflicts and unknowns',
+    'Durable decisions and gotchas',
+  ];
 
-  if (!/^[-*]\s+\d{4}-\d{2}-\d{2}:/m.test(contextBlock)) {
-    errors.push('LLM_CONTEXT History must contain at least one dated entry: - YYYY-MM-DD: ...');
+  for (const section of requiredContextSections) {
+    const escaped = section.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (!new RegExp(`^##\\s+${escaped}\\s*$`, 'm').test(contextBlock)) {
+      errors.push(`LLM_CONTEXT must contain a ${section} section`);
+    }
   }
 }
 

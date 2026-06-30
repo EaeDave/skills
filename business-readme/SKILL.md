@@ -10,7 +10,7 @@ description: Identifies business rules from project context and maintains a conc
 1. Ask the output language before writing docs: `1. Português do Brasil`, `2. English`, or custom typed language. If the user already answered in this conversation, use that.
 2. Inspect the project context: README, docs, tests, routes/controllers/use-cases/domain models, schemas/migrations/seeds, config, examples, integration clients, real endpoints/operation names, and recent task context relevant to business behavior.
 3. Update `README.md` so business rules come first in human language, then technical execution instructions.
-4. Create or update `docs/LLM_CONTEXT.md` with implementation-facing context, source map, real endpoints/operations, uncertainties, and history. If the root-level `docs/` directory does not exist, create it first.
+4. Create or update `docs/LLM_CONTEXT.md` with implementation-facing current context, source map, real endpoints/operations, uncertainties, and durable gotchas. If the root-level `docs/` directory does not exist, create it first.
 5. Run the validator script if available: `node <skill>/scripts/validate-business-readme.cjs <project-root>`.
 
 ## Source-of-truth policy
@@ -62,22 +62,23 @@ Create or update this file inside a root-level `docs/` directory. If `docs/` doe
 [Short index of rules, where they are implemented/tested, and their labeled real sources: internal endpoints/events/jobs vs external APIs/operations.]
 
 ## Technical map for future LLMs
-[Entrypoints, important directories, commands, data model, integrations, external operation names, internal route names, gotchas.]
+[Current entrypoints, important directories, commands, data model, integrations, external operation names, internal route names, and active gotchas.]
 
 ## Conflicts and unknowns
-[Only unresolved ambiguity or divergence between code/tests/docs.]
+[Only unresolved ambiguity or divergence between code/tests/docs. Write `None observed.` when there are no active conflicts or unknowns.]
 
-## History
-- YYYY-MM-DD: [What changed, why, and sources inspected.]
+## Durable decisions and gotchas
+[Only decisions, caveats, or past context that still affects future code changes. Do not keep execution logs here.]
 <!-- business-readme:context:end -->
 ```
 
-Rules for history:
+Rules for `docs/LLM_CONTEXT.md`:
 
-- Append one history entry per skill run that changes or validates business rules.
-- Never delete previous history entries unless the user explicitly asks.
-- Each entry should name the main sources inspected and the rule changes made.
-- If a feature or bug fix changes business behavior, update `README.md` and `docs/LLM_CONTEXT.md` in the same work.
+- Keep this file as a current-state implementation map, not a changelog.
+- Do not append one entry per skill run; git history, PRs, issues, session logs, and ai-memory are the historical record.
+- Remove or rewrite obsolete context instead of preserving it for history.
+- Keep durable decisions or gotchas only when they still constrain future implementation.
+- If a feature or bug fix changes business behavior, update `README.md` and the current-state sections of `docs/LLM_CONTEXT.md` in the same work.
 
 ## Workflow
 
@@ -87,12 +88,12 @@ Rules for history:
 4. Write the README business section as the canonical human explanation.
 5. Write the technical guide from observed project commands and preserved README commands.
 6. Create or write/update `docs/LLM_CONTEXT.md` for future implementation/debugging context.
-7. Validate required files, markers, section order, and history.
+7. Validate required files, markers, section order, and current-state context.
 
 ## Quality bar
 
 - Complete business rules are more important than exhaustive architecture prose.
 - Concise does not mean shallow: include edge cases and exceptions that affect users.
 - Do not create parallel terminology; reuse domain words already present in code, tests, UI, and docs.
-- Do not add changelog-style noise to README. Keep run history in `docs/LLM_CONTEXT.md`.
+- Do not add changelog-style noise to README or `docs/LLM_CONTEXT.md`; keep `docs/LLM_CONTEXT.md` focused on current implementation context and durable constraints.
 - Do not ship placeholders like `TODO`, `TBD`, or generic boilerplate as if complete.

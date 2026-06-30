@@ -90,7 +90,7 @@ The skill will:
 1. ask which language the docs should use;
 2. inspect relevant project sources;
 3. update `README.md` with business rules before technical instructions;
-4. create or update `docs/LLM_CONTEXT.md` with implementation-facing context, labeled internal/external endpoints and operations, and uncertainties;
+4. create or update `docs/LLM_CONTEXT.md` with current implementation context, labeled internal/external endpoints and operations, uncertainties, and durable gotchas;
 5. validate the generated documentation when the validator script is available.
 
 Validator command:
