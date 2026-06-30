@@ -44,6 +44,10 @@ These skills keep that context close to the code, explicit, and maintainable.
 
 ## Current Skills
 
+### Coding standards
+
+- **[clean-code-for-agents](./clean-code-for-agents/SKILL.md)** — Applies a Clean Code discipline tuned for AI agents, follows an XP/TDD loop, and installs persistent `AGENTS.md` / `CLAUDE.md` rules from a marker-delimited template.
+
 ### Documentation
 
 - **[business-readme](./business-readme/SKILL.md)** — Identifies business rules from project context and maintains a concise `README.md` with human-readable rules first, including labeled internal endpoints and external APIs/operations when relevant. Also maintains `docs/LLM_CONTEXT.md` for future agents.
@@ -57,6 +61,11 @@ skills/
     SKILL.md
     scripts/
       validate-business-readme.cjs
+  clean-code-for-agents/
+    SKILL.md
+    assets/
+      agent-rules.md
+    clean-code-for-agents.skill
   work-report/
     SKILL.md
 ```
