@@ -42,7 +42,7 @@ function requireNonEmpty(block, label) {
 }
 
 function rejectPlaceholders(block, label) {
-  const placeholderPattern = /\b(TODO|TBD|FIXME|PLACEHOLDER)\b|\[(Complete product rules|How to install|Short index|Current entrypoints|Only unresolved|Only decisions)[^\]]*\]/i;
+  const placeholderPattern = /\b(TODO|TBD|FIXME|PLACEHOLDER)\b|\[(Complete product rules|How to install|Pointers only|Only what reading|Only unresolved|Only decisions)[^\]]*\]/i;
   if (placeholderPattern.test(block)) {
     errors.push(`${label} contains placeholder text`);
   }
@@ -81,7 +81,7 @@ if (context) {
 
   const requiredContextSections = [
     'Current business rule map',
-    'Technical map for future LLMs',
+    'Non-inferable technical facts',
     'Conflicts and unknowns',
     'Durable decisions and gotchas',
   ];
@@ -91,6 +91,15 @@ if (context) {
     if (!new RegExp(`^##\\s+${escaped}\\s*$`, 'm').test(contextBlock)) {
       errors.push(`LLM_CONTEXT must contain a ${section} section`);
     }
+  }
+
+  // Size is a soft cost signal (redundant context ≈ +20% inference cost,
+  // arXiv:2602.11988): warn past ~100 lines, never fail.
+  const contextLines = contextBlock.split('\n').length;
+  if (contextLines > 100) {
+    console.warn(
+      `warning: LLM_CONTEXT block has ${contextLines} lines (recommended <= 100); cut inferable content first`
+    );
   }
 }
 

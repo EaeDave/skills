@@ -27,6 +27,7 @@ description: Generates concise human-readable Markdown work reports as root-leve
 - Build `<short-topic>` from the feature or bug in kebab-case, without accents, spaces, or punctuation.
 - If the same-scope report already exists, update it. If the name collides with a different report, add `-2`, `-3`, etc.
 - Final chat response should include the file path and one-sentence summary, not the full report unless asked.
+- Reports are delivery artifacts for humans, not agent context: never reference them from `AGENTS.md`, `CLAUDE.md`, or `docs/LLM_CONTEXT.md`, and never treat old reports as a source of truth about current behavior.
 
 ## Report shape
 
