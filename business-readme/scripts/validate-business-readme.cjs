@@ -42,8 +42,11 @@ function requireNonEmpty(block, label) {
 }
 
 function rejectPlaceholders(block, label) {
-  const placeholderPattern = /\b(TODO|TBD|FIXME|PLACEHOLDER)\b|\[(Complete product rules|How to install|Pointers only|Only what reading|Only unresolved|Only decisions)[^\]]*\]/i;
-  if (placeholderPattern.test(block)) {
+  // Dev markers must stay case-sensitive: an unfilled template writes them in
+  // caps, while lowercase "todo"/"tbd" is ordinary prose in pt-BR/es.
+  const devMarker = /\b(TODO|TBD|FIXME|PLACEHOLDER)\b/;
+  const templateBracket = /\[(Complete product rules|How to install|Pointers only|Only what reading|Only unresolved|Only decisions)[^\]]*\]/i;
+  if (devMarker.test(block) || templateBracket.test(block)) {
     errors.push(`${label} contains placeholder text`);
   }
 }
