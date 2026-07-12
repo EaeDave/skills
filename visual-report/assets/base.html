@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REPORT_TITLE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "neutral" });
+  </script>
+  <style>
+    @media print {
+      .no-print { display: none; }
+      main { max-width: none; }
+    }
+    .mermaid { display: flex; justify-content: center; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-5xl mx-auto px-6 py-8">
+      <h1 class="text-3xl font-bold tracking-tight">REPORT_TITLE</h1>
+      <p class="mt-2 text-slate-500">REPORT_SUBTITLE · REPORT_DATE</p>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 py-10 space-y-12">
+    <!-- Sections go here. Building blocks:
+
+    Section:
+      <section>
+        <h2 class="text-xl font-semibold mb-4">…</h2>
+        …
+      </section>
+
+    Card:
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">…</div>
+
+    Side-by-side grid (comparison):
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">…</div>
+
+    Highlight badge (diffs):
+      <span class="inline-block px-2 py-0.5 rounded-full text-xs font-medium
+                   bg-amber-100 text-amber-800">difere</span>
+      <span class="… bg-emerald-100 text-emerald-800">igual</span>
+
+    Table:
+      <table class="w-full text-sm border-collapse">
+        <thead><tr class="border-b border-slate-300 text-left">
+          <th class="py-2 pr-4 font-semibold">…</th></tr></thead>
+        <tbody><tr class="border-b border-slate-100">
+          <td class="py-2 pr-4">…</td></tr></tbody>
+      </table>
+
+    Mermaid diagram:
+      <pre class="mermaid">
+        flowchart TD
+          A[…] --&gt; B[…]   (unescape the arrow in real content)
+      </pre>
+    -->
+  </main>
+
+  <footer class="max-w-5xl mx-auto px-6 py-8 text-sm text-slate-400">
+    Relatório gerado em REPORT_DATE.
+  </footer>
+</body>
+</html>
