@@ -1,6 +1,7 @@
 ---
 name: business-readme
-description: Identifies business rules from project context and maintains a concise README with human-readable business rules first, then technical run instructions, plus `docs/LLM_CONTEXT.md` for future agents. Use when the user asks to update a README from project context, extract business rules, document product behavior, maintain LLM project context, or when a feature/debug fix changes business rules.
+description: Identifies business rules from project context and maintains a concise README with human-readable business rules first, then technical run instructions, plus `docs/LLM_CONTEXT.md` for future agents. User-invoked only via /business-readme.
+disable-model-invocation: true
 ---
 
 # Business README

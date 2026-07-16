@@ -50,7 +50,7 @@ These skills keep that context close to the code, explicit, and maintainable.
 
 ### Documentation
 
-- **[business-readme](./business-readme/SKILL.md)** — Identifies business rules from project context and maintains a concise `README.md` with human-readable rules first, including labeled internal endpoints and external APIs/operations when relevant. Also maintains `docs/LLM_CONTEXT.md` for future agents.
+- **[business-readme](./business-readme/SKILL.md)** — Identifies business rules from project context and maintains a concise `README.md` with human-readable rules first, including labeled internal endpoints and external APIs/operations when relevant. Also maintains `docs/LLM_CONTEXT.md` for future agents. User-invoked only.
 - **[work-report](./work-report/SKILL.md)** — Generates concise Markdown work reports for Jira, Linear, or similar cards from the current session, relevant code changes, and related commits.
 - **[visual-report](./visual-report/SKILL.md)** — Generates stakeholder-facing, self-contained HTML reports with Mermaid diagrams for comparing business rules, mapping project context, and visualizing flows or timelines. User-invoked only.
 
@@ -93,7 +93,7 @@ Skill instructions here.
 
 ## Using `business-readme`
 
-After installing, run the skill from your agent when you want to create or refresh project documentation from actual project context.
+After installing, invoke the skill explicitly (e.g. `/business-readme`) when you want to create or refresh project documentation from actual project context. The agent will not trigger it on its own.
 
 The skill will:
 
