@@ -36,13 +36,13 @@ Use this structure unless the user asks otherwise:
 ```md
 # Relatório de entrega — [card or topic]
 
-**Contexto:** [Problem, feature, bug fix, or motivation in plain language.]
+**Contexto:** [Problem, feature, bug fix, or motivation, as I understood it — plain language.]
 
-**Destaque:** [Most important business outcome delivered.]
+**Destaque:** [Most important business outcome I delivered.]
 
 ## O que foi feito
-- [Business-facing behavior delivered.]
-- [Important rule, state, validation, exception, or outcome.]
+- [What I did, first person: "Investiguei...", "Corrigi...", "Implementei...", "Ajustei...", "Mudei...".]
+- [Important rule, state, validation, exception, or outcome I found or produced.]
 - [Light technical detail only when useful to explain impact.]
 
 ## Regras de negócio impactadas
@@ -52,7 +52,7 @@ Use this structure unless the user asks otherwise:
 - `abc1234` — [commit subject]: [what it contributed]
 
 ## Validação
-- [Tests, build, manual check, or observed verification.]
+- [Tests, build, manual check, or observed verification I ran.]
 
 ## Observações
 - [Only unresolved ambiguity, risk, follow-up, or deployment note. Omit if empty.]
@@ -60,6 +60,8 @@ Use this structure unless the user asks otherwise:
 
 ## Writing style
 
+- Write in the first person, as the person who did the work: "eu fiz", "investiguei", "mudei", "corrigi", "implementei", "ajustei". Never third person ("o agente fez", "foi implementado") and never passive voice used to hide the author.
+- Never sound like an AI-generated changelog: no "Summary of changes" headers, no robotic fragments, no meta-commentary about being an assistant or a model, no restating the request back before answering it. Write like a teammate typing a quick, honest update for a colleague.
 - Match the user's language; default to Português do Brasil when the user writes in Portuguese.
 - Keep the default report around 300-600 words.
 - Use copyable raw Markdown syntax in the file: `#`, `##`, `**bold**`, lists, and backticked commands/commits.
