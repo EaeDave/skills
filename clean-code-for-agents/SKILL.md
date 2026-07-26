@@ -33,6 +33,20 @@ This version is calibrated against measured results, not taste:
   instruction-following degrades past ~150–200 instructions
   (arXiv:2507.11538). These caps are expert consensus, not benchmarks — the
   cost of redundancy above IS measured.
+- **Unit size**: the binding limit is the *total context a task assembles*,
+  not one file's length. Successful agent trajectories cluster at 20–30k
+  tokens; by 64k the resolve rate falls to 0–7% **even with perfect
+  retrieval** (arXiv:2602.16069). Length alone costs 13.9–85% accuracy
+  *within* the claimed window, even with retrieval perfect and the
+  irrelevant tokens masked out (Du et al., EMNLP 2025 findings.1264).
+  Lexical recall survives (>95%); *semantic* recall is what collapses
+  (−53% median, Štorek et al., ACL 2026 long.19). Meanwhile per-line defect
+  density is **higher** in small modules, not lower (Koru et al., IEEE TSE
+  2009, DOI 10.1109/TSE.2008.90, power law; Basili & Perricone 1984,
+  16.0→6.4 errors/KLOC as size rises), and the 200-line "optimum" U-curve
+  is a mathematical artifact of how the data was binned (Jones, 2023).
+  Only one size figure has modern backing: Java methods ≲24 SLOC
+  (Chowdhury et al., MSR 2022, 785k methods, 49 projects).
 
 ## The two jobs
 
@@ -60,8 +74,19 @@ move detail into `docs/*` referenced on demand (progressive disclosure).
 
 Ordered most-impactful first.
 
-1. **Small functions and files.** Functions 4–20 lines; files under 500,
-   ideally 200–300. A unit that fits one tool call gets full attention.
+1. **Right-sized units — measured by context, never by a line quota.**
+   Files have **no line budget**. Split a file when it has two reasons to
+   change, not when it crosses a number; splitting on arbitrary boundaries
+   measurably hurts (chunking at raw function boundaries costs 3.57–5.64pp
+   EM, Cliff's δ = −1.0, and is never Pareto-optimal; unit *size* itself has
+   only a weak, non-monotonic effect — arXiv:2605.04763) and every extra
+   fragment is another hop the agent must navigate. Functions: one whole
+   idea, ~≤25 SLOC as a soft signal — a longer straight-line function beats
+   an indirection the agent has to chase. **Never refactor solely to hit a
+   line count.** The real test: *can the agent finish a task by grepping a
+   symbol and reading one region, without loading the whole file?* Yes → the
+   file is fine at any length. No → the defect is cohesion or naming, not
+   size. Budget the working set (~20–30k tokens), not the file.
 2. **Single Responsibility.** One reason to change; lets the agent isolate,
    test, and edit without side effects.
 3. **Meaningful, unique, greppable names.** Grep is the navigation API. If a
@@ -89,8 +114,9 @@ Ordered most-impactful first.
 11. **Errors with context.** Include the offending value and expected shape —
     the message is the agent's debug signal.
 12. **Limits are constraints, not suggestions.** Wire the formatter, the
-    linter, and file-size/nesting caps into CI. The formatter decides style;
-    nobody debates it.
+    linter, and nesting caps into CI. The formatter decides style; nobody
+    debates it. A repo MAY add a file-size cap — but as a *review trigger*
+    for a cohesion check, never as an automatic mandate to split.
 
 ## The verification loop (replaces the XP ritual)
 
@@ -111,7 +137,8 @@ measurably helps. Work like this:
 
 - `AGENTS.md` as a lean index; details live in `docs/*`, loaded on demand.
 - Machine-readable tool output: linter/test JSON flags where available.
-- Size and nesting caps enforced by CI/linter.
+- Nesting caps enforced by CI/linter; any size cap wired as a warning that
+  prompts a cohesion review, not a hard failure.
 - Docs in-repo and versioned — agents cannot see wikis or Google Docs.
 - Idempotent setup script (`bin/setup`) taking a clean machine to working.
 - Structured JSON logs for services; plain text only for user-facing CLI.
@@ -158,5 +185,6 @@ anything the admission filter removed and why.
   ritual to perform.
 - **Idempotent.** Re-running the skill improves code and rules without
   duplicating anything.
-- **Adapt, don't dogmatize.** Thresholds are strong defaults — tune them per
-  language/team and say what you changed.
+- **Adapt, don't dogmatize.** No number here is a target. Cohesion,
+  greppability, and the size of the working set decide; line counts are at
+  most a prompt to go look. Tune per language/team and say what you changed.
