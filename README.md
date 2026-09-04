@@ -52,6 +52,7 @@ These skills keep that context close to the code, explicit, and maintainable.
 
 - **[business-readme](./business-readme/SKILL.md)** — Identifies business rules from project context and maintains a concise `README.md` with human-readable rules first, including labeled internal endpoints and external APIs/operations when relevant. Also maintains `docs/LLM_CONTEXT.md` for future agents. User-invoked only.
 - **[work-report](./work-report/SKILL.md)** — Generates concise Markdown work reports for Jira, Linear, or similar cards from the current session, relevant code changes, and related commits.
+- **[jira](./jira/SKILL.md)** — Inspects, creates, and updates MD Software Jira cards through the Executor MCP with approval-gated worklogs, dates, statuses, and commit links.
 - **[visual-report](./visual-report/SKILL.md)** — Generates stakeholder-facing, self-contained HTML reports with Mermaid diagrams for comparing business rules, mapping project context, and visualizing flows or timelines. User-invoked only.
 
 ## Repository Structure
@@ -67,6 +68,8 @@ skills/
     assets/
       agent-rules.md
     clean-code-for-agents.skill
+  jira/
+    SKILL.md
   work-report/
     SKILL.md
   visual-report/
