@@ -1,10 +1,9 @@
 <!-- clean-code-agents:start -->
-## Agent rules — non-inferable project facts only
+## Agent rules: non-inferable project facts only
 
-Admission filter: if a tool can enforce a rule, it lives in a check, not here;
-if an agent can discover a fact by reading the code, it does NOT belong here.
-Redundant context costs ~20% extra inference (arXiv:2602.11988). Keep this
-block under 40 lines.
+If a tool can enforce a rule, it lives in a check, not here. If an agent can
+read a fact from the code, it does not belong here. Keep this block under 40
+lines.
 
 ### Commands (run these, never guess)
 - Test: `<TEST_COMMAND>`
@@ -16,8 +15,8 @@ Prefer machine-readable output where supported (JSON reporter flags).
 
 ### Architecture
 - <ARCHITECTURE_RULE>
-<!-- One line, the rule only — never list forbidden module paths. E.g.
-     "New features go in a new slice under src/features/<name>/; slices use
+<!-- One line, the rule only; never list forbidden module paths. E.g.
+     "New features go in their own folder under src/<feature>/; features use
      each other only through their public entry." or, for an opinionated
      framework, "Follow Rails conventions; group by feature only via engines." -->
 
@@ -27,7 +26,8 @@ Prefer machine-readable output where supported (JSON reporter flags).
   check. Never done on red.
 - Existing tests are the specification: never weaken, skip, or delete one.
 - New tests: state the contract (pre/post-conditions, invalid inputs) first;
-  a test counts only after it fails on the unfixed code. Bug fix → regression test.
+  a test counts only after it fails on the unfixed code. Bug fix gets a
+  regression test.
 - Never loosen input validation or error handling as a side effect.
 - Refactors go in their own commit, never mixed into a fix or feature.
 

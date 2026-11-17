@@ -46,7 +46,7 @@ These skills keep that context close to the code, explicit, and maintainable.
 
 ### Coding standards
 
-- **[clean-code-for-agents](./clean-code-for-agents/SKILL.md)** — Applies a Clean Code discipline tuned for AI agents (vertical slices with tool-checked boundaries, testable modules, targeted verification loop) and installs lean `AGENTS.md` / `CLAUDE.md` rules from a marker-delimited template, turning enforceable rules into checks.
+- **[clean-code-for-agents](./clean-code-for-agents/SKILL.md)** — Clean Code tuned for AI agents: vertical slices with tool-checked boundaries, testable modules, targeted test verification, and a lean `AGENTS.md` / `CLAUDE.md` rules block.
 
 ### Documentation
 
@@ -67,6 +67,8 @@ skills/
     SKILL.md
     assets/
       agent-rules.md
+    references/
+      evidence.md
   jira/
     SKILL.md
   work-report/
